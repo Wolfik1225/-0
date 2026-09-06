@@ -25,6 +25,8 @@ namespace WpfApp50
             Point2D p1 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
             Point2D p2 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
             Point2D p3 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
+            tr = new Triangle(p1, p2, p3);
+            DrawTriangle(tr);
         }
         public void DrawLine(Point2D p1, Point2D p2)
         {
