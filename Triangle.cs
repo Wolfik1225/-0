@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp50
 {
-    public class Triangle лоплпом
+    public class Triangle
     {
         public Point2D P1 { get; private set; }
         public Point2D P2 { get; private set; }
