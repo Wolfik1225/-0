@@ -29,6 +29,8 @@ namespace WpfApp50
             DrawTriangle(tr);
             Rectangle rect = new Rectangle(new Point2D(50, 50), 200, 100);
             DrawRectangle(rect);
+            Rectangle square = new Rectangle(new Point2D(100, 155), 150, 150);
+            DrawRectangle(square);
         }
         public void DrawLine(Point2D p1, Point2D p2)
         {
@@ -69,6 +71,49 @@ namespace WpfApp50
             DrawLine(topRight, bottomRight);
             DrawLine(bottomRight, bottomLeft);
             DrawLine(bottomLeft, topLeft);
+        }
+        private void BtnUserTriangle_Click(object sender, RoutedEventArgs e)
+        {
+            ClearScene();
+            Point2D p1 = new Point2D(int.Parse(TxtX1.Text), int.Parse(TxtY1.Text));
+            Point2D p2 = new Point2D(int.Parse(TxtX2.Text), int.Parse(TxtY2.Text));
+            Point2D p3 = new Point2D(int.Parse(TxtX3.Text), int.Parse(TxtY3.Text));
+            tr = new Triangle(p1, p2, p3);
+            DrawTriangle(tr);
+        }
+
+        private void BtnRandomTriangle_Click(object sender, RoutedEventArgs e)
+        {
+            ClearScene();
+            Point2D p1 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
+            Point2D p2 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
+            Point2D p3 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
+            tr = new Triangle(p1, p2, p3);
+            DrawTriangle(tr);
+        }
+
+        private void BtnRandomRect_Click(object sender, RoutedEventArgs e)
+        {
+            ClearScene();
+            Point2D start = new Point2D(rnd.Next(0, (int)Scene.Width / 2), rnd.Next(0, (int)Scene.Height / 2));
+            int w = rnd.Next(50, 200);
+            int h = rnd.Next(50, 150);
+            Rectangle rect = new Rectangle(start, w, h);
+            DrawRectangle(rect);
+        }
+
+        private void BtnSquare_Click(object sender, RoutedEventArgs e)
+        {
+            ClearScene();
+            Point2D start = new Point2D(rnd.Next(0, (int)Scene.Width / 2), rnd.Next(0, (int)Scene.Height / 2));
+            int side = rnd.Next(50, 150);
+            Rectangle square = new Rectangle(start, side, side);
+            DrawRectangle(square);
+        }
+
+        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        {
+            ClearScene();
         }
     }
 }

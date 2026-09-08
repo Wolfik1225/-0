@@ -7,8 +7,33 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Canvas x:Name = "Scene" HorizontalAlignment="Left" Height="400" Margin="15,0,0,0" VerticalAlignment="Center" Width="680" />
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Canvas x:Name = "Scene" HorizontalAlignment="Left" Height="400" Margin="15,0,0,0" VerticalAlignment="Center" Width="680" Grid.Row="1" />
 
+        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="0">
+            <TextBlock Text="X1:" VerticalAlignment="Center"/>
+            <TextBox x:Name="TxtX1" Width="40" Margin="2"/>
+            <TextBlock Text="Y1:" VerticalAlignment="Center"/>
+            <TextBox x:Name="TxtY1" Width="40" Margin="2"/>
+
+            <TextBlock Text="X2:" VerticalAlignment="Center"/>
+            <TextBox x:Name="TxtX2" Width="40" Margin="2"/>
+            <TextBlock Text="Y2:" VerticalAlignment="Center"/>
+            <TextBox x:Name="TxtY2" Width="40" Margin="2"/>
+
+            <TextBlock Text="X3:" VerticalAlignment="Center"/>
+            <TextBox x:Name="TxtX3" Width="40" Margin="2"/>
+            <TextBlock Text="Y3:" VerticalAlignment="Center"/>
+            <TextBox x:Name="TxtY3" Width="40" Margin="2"/>
+
+            <Button x:Name="BtnUserTriangle" Content="Треугольник по точкам" Click="BtnUserTriangle_Click" Margin="10,0,0,0"/>
+            <Button x:Name="BtnRandomTriangle" Content="Случайный треугольник" Click="BtnRandomTriangle_Click" Margin="5,0,0,0"/>
+            <Button x:Name="BtnRandomRect" Content="Случайный прямоугольник" Click="BtnRandomRect_Click" Margin="5,0,0,0"/>
+            <Button x:Name="BtnSquare" Content="Квадрат" Click="BtnSquare_Click" Margin="5,0,0,0"/>
+            <Button x:Name="BtnClear" Content="Очистить" Click="BtnClear_Click" Margin="5,0,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>
