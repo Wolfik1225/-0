@@ -27,6 +27,8 @@ namespace WpfApp50
             Point2D p3 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
             tr = new Triangle(p1, p2, p3);
             DrawTriangle(tr);
+            Rectangle rect = new Rectangle(new Point2D(50, 50), 200, 100);
+            DrawRectangle(rect);
         }
         public void DrawLine(Point2D p1, Point2D p2)
         {
@@ -52,6 +54,21 @@ namespace WpfApp50
         public void ClearScene()
         {
             Scene.Children.Clear();
+        }
+
+        public void DrawRectangle(Rectangle rect)
+        {
+            // Вычисляем 4 угла прямоугольника из стартовой точки, ширины и высоты
+            Point2D topLeft = rect.Start;
+            Point2D topRight = new Point2D(rect.Start.X + rect.Width, rect.Start.Y);
+            Point2D bottomRight = new Point2D(rect.Start.X + rect.Width, rect.Start.Y + rect.Height);
+            Point2D bottomLeft = new Point2D(rect.Start.X, rect.Start.Y + rect.Height);
+
+            // Соединяем углы линиями по кругу
+            DrawLine(topLeft, topRight);
+            DrawLine(topRight, bottomRight);
+            DrawLine(bottomRight, bottomLeft);
+            DrawLine(bottomLeft, topLeft);
         }
     }
 }
