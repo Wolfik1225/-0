@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp50"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Canvas x:Name = "Scene" HorizontalAlignment="Left" Height="400" Margin="15,0,0,0" VerticalAlignment="Center" Width="680" Grid.Row="1" />
+        <Canvas x:Name = "Scene" HorizontalAlignment="Left" Height="400" Margin="15,0,0,0" VerticalAlignment="Center" Width="780" Grid.Row="2" />
 
         <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="0">
             <TextBlock Text="X1:" VerticalAlignment="Center"/>
@@ -34,6 +35,12 @@
             <Button x:Name="BtnRandomRect" Content="Случайный прямоугольник" Click="BtnRandomRect_Click" Margin="5,0,0,0"/>
             <Button x:Name="BtnSquare" Content="Квадрат" Click="BtnSquare_Click" Margin="5,0,0,0"/>
             <Button x:Name="BtnClear" Content="Очистить" Click="BtnClear_Click" Margin="5,0,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1">
+            <TextBlock Text="Сдвиг X:" VerticalAlignment="Center"/>
+            <Slider x:Name="SliderX" Width="150" Minimum="-200" Maximum="200" ValueChanged="SliderX_ValueChanged"/>
+            <TextBlock Text="Сдвиг Y:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <Slider x:Name="SliderY" Width="150" Minimum="-200" Maximum="200" ValueChanged="SliderY_ValueChanged"/>
         </StackPanel>
     </Grid>
 </Window>
