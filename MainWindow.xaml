@@ -71,6 +71,8 @@
             <Button x:Name="BtnRemoveEnemy" Content="Remove" Click="BtnRemoveEnemy_Click" Margin="5,0,0,0"/>
 
             <ListBox x:Name="EnemiesListBox" Width="200" Height="30" Margin="10,0,0,0"/>
+            <Button x:Name="BtnSaveEnemies" Content="Сохранить" Click="BtnSaveEnemies_Click" Margin="10,0,0,0"/>
+            <Button x:Name="BtnLoadEnemies" Content="Загрузить" Click="BtnLoadEnemies_Click" Margin="5,0,0,0"/>
         </WrapPanel>
     </Grid>
 </Window>

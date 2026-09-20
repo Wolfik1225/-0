@@ -273,5 +273,30 @@ namespace WpfApp50
                 EnemiesListBox.Items.Add(name);
             }
         }
+        private void BtnSaveEnemies_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = "enemies";
+            dlg.DefaultExt = ".json";
+            dlg.Filter = "JSON files (.json)|*.json";
+
+            if (dlg.ShowDialog() == true)
+            {
+                enemyList.SaveToJson(dlg.FileName);
+            }
+        }
+
+        private void BtnLoadEnemies_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.DefaultExt = ".json";
+            dlg.Filter = "JSON files (.json)|*.json";
+
+            if (dlg.ShowDialog() == true)
+            {
+                enemyList.LoadFromJson(dlg.FileName);
+                RefreshEnemiesListBox();
+            }
+        }
     }
 }
