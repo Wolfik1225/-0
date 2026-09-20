@@ -1,4 +1,5 @@
 ﻿using System.Buffers.Text;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,7 @@ namespace WpfApp50
     {
         Triangle tr;
         Random rnd = new Random();
+        List<EnemyIcon> enemyIcons = new List<EnemyIcon>();
         Point2D baseP1, baseP2, baseP3; // запомненные "родные" координаты 
         Point2D baseRectStart;
         int baseRectW, baseRectH;
@@ -160,6 +162,30 @@ namespace WpfApp50
                 Point2D newStart = new Point2D(baseRectStart.X + dx, baseRectStart.Y + dy);
                 rect = new Rectangle(newStart, baseRectW, baseRectH);
                 DrawRectangle(rect);
+            }
+        }
+
+        public void LoadIconsFromFolder(string path)
+        {
+            // фильтр расширения изображения
+            string filter = "*.png";
+
+            // получение массива строк, содержащих пути до изображений
+            string[] files = Directory.GetFiles(path, filter);
+
+            // перебор всех полученных путей
+            // в file содержится путь до изображения с расширением .png
+            foreach (string file in files)
+            {
+                enemyIcons.Add(
+                    new EnemyIcon
+                    {
+                        // получение имени файла с расширением
+                        Name = System.IO.Path.GetFileName(file),
+                        // получение полного пути до файла
+                        ImagePath = file
+                    }
+                );
             }
         }
     }
