@@ -20,7 +20,7 @@ namespace WpfApp50
     {
         Triangle tr;
         Random rnd = new Random();
-        Point2D baseP1, baseP2, baseP3; // запомненные "родные" координаты треугольника
+        Point2D baseP1, baseP2, baseP3; // запомненные "родные" координаты 
         Point2D baseRectStart;
         int baseRectW, baseRectH;
         Rectangle rect;
@@ -154,6 +154,7 @@ namespace WpfApp50
                 tr = new Triangle(newP1, newP2, newP3);
                 DrawTriangle(tr);
             }
+
             if (baseRectStart != null)
             {
                 Point2D newStart = new Point2D(baseRectStart.X + dx, baseRectStart.Y + dy);
