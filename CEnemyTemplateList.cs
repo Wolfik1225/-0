@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace WpfApp50
 {
+    using System.IO;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
+
     using System.Collections.Generic;
     public class CEnemyTemplateList
     {
@@ -71,6 +75,36 @@ namespace WpfApp50
                 names.Add(enemy.Name);
             }
             return names;
+        }
+        // Сохранение списка противников в файл
+        public void SaveToJson(string path)
+        {
+            string jsonString = JsonSerializer.Serialize(enemies);
+            File.WriteAllText(path, jsonString);
+        }
+
+        // Загрузка списка противников из файла
+        public void LoadFromJson(string path)
+        {
+            string jsonFromFile = File.ReadAllText(path);
+            enemies = new List<CEnemyTemplate>();
+
+            JsonDocument doc = JsonDocument.Parse(jsonFromFile);
+            foreach (JsonElement element in doc.RootElement.EnumerateArray())
+            {
+                string name = element.GetProperty("Name").GetString();
+                string iconName = element.GetProperty("IconName").GetString();
+                int baseLife = element.GetProperty("BaseLife").GetInt32();
+                double lifeModifier = element.GetProperty("LifeModifier").GetDouble();
+                int baseGold = element.GetProperty("BaseGold").GetInt32();
+                double goldModifier = element.GetProperty("GoldModifier").GetDouble();
+                double spawnChance = element.GetProperty("SpawnChance").GetDouble();
+
+                CEnemyTemplate enemy = new CEnemyTemplate(name, iconName, baseLife,
+                                                            lifeModifier, baseGold,
+                                                            goldModifier, spawnChance);
+                enemies.Add(enemy);
+            }
         }
     }
 }
