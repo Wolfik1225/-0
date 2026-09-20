@@ -22,6 +22,7 @@ namespace WpfApp50
         Triangle tr;
         Random rnd = new Random();
         List<EnemyIcon> enemyIcons = new List<EnemyIcon>();
+        CEnemyTemplateList enemyList = new CEnemyTemplateList();
         string selectedIconName = "";
         Point2D baseP1, baseP2, baseP3; // запомненные "родные" координаты 
         Point2D baseRectStart;
@@ -238,6 +239,38 @@ namespace WpfApp50
 
                 // сохраняем выбранное имя иконки в поле — пригодится при создании противника
                 selectedIconName = iconName;
+            }
+        }
+        private void BtnAddEnemy_Click(object sender, RoutedEventArgs e)
+        {
+            string name = TxtEnemyName.Text;
+            int baseLife = int.Parse(TxtBaseLife.Text);
+            double lifeModifier = double.Parse(TxtLifeModifier.Text);
+            int baseGold = int.Parse(TxtBaseGold.Text);
+            double goldModifier = double.Parse(TxtGoldModifier.Text);
+            double spawnChance = double.Parse(TxtSpawnChance.Text);
+
+            enemyList.AddEnemy(name, selectedIconName, baseLife, lifeModifier,
+                                baseGold, goldModifier, spawnChance);
+
+            RefreshEnemiesListBox();
+        }
+
+        private void BtnRemoveEnemy_Click(object sender, RoutedEventArgs e)
+        {
+            if (EnemiesListBox.SelectedIndex >= 0)
+            {
+                enemyList.DeleteEnemyByIndex(EnemiesListBox.SelectedIndex);
+                RefreshEnemiesListBox();
+            }
+        }
+
+        private void RefreshEnemiesListBox()
+        {
+            EnemiesListBox.Items.Clear();
+            foreach (string name in enemyList.GetListOfNames())
+            {
+                EnemiesListBox.Items.Add(name);
             }
         }
     }

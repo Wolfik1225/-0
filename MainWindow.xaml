@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp50"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="1000" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="150"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Canvas x:Name = "Scene" HorizontalAlignment="Left" Height="400" Margin="15,0,0,0" VerticalAlignment="Center" Width="780" Grid.Row="2" />
 
@@ -47,5 +48,29 @@
             <Button x:Name="BtnLoadIcons" Content="Загрузить иконки" Click="BtnLoadIcons_Click" Margin="0,0,10,0"/>
             <ListBox Width="400" Margin="10 20" Name="IconsListBox" SelectionChanged="IconsListBox_SelectionChanged"/>
         </StackPanel>
+        <WrapPanel Margin="10" Grid.Row="4">
+            <TextBlock Text="Имя:" VerticalAlignment="Center"/>
+            <TextBox x:Name="TxtEnemyName" Width="80" Margin="2"/>
+
+            <TextBlock Text="Base life:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <TextBox x:Name="TxtBaseLife" Width="50" Margin="2"/>
+
+            <TextBlock Text="Life mod:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <TextBox x:Name="TxtLifeModifier" Width="50" Margin="2"/>
+
+            <TextBlock Text="Base gold:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <TextBox x:Name="TxtBaseGold" Width="50" Margin="2"/>
+
+            <TextBlock Text="Gold mod:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <TextBox x:Name="TxtGoldModifier" Width="50" Margin="2"/>
+
+            <TextBlock Text="Spawn chance:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <TextBox x:Name="TxtSpawnChance" Width="50" Margin="2"/>
+
+            <Button x:Name="BtnAddEnemy" Content="Add" Click="BtnAddEnemy_Click" Margin="10,0,0,0"/>
+            <Button x:Name="BtnRemoveEnemy" Content="Remove" Click="BtnRemoveEnemy_Click" Margin="5,0,0,0"/>
+
+            <ListBox x:Name="EnemiesListBox" Width="200" Height="30" Margin="10,0,0,0"/>
+        </WrapPanel>
     </Grid>
 </Window>
