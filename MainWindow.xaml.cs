@@ -22,6 +22,7 @@ namespace WpfApp50
         Triangle tr;
         Random rnd = new Random();
         List<EnemyIcon> enemyIcons = new List<EnemyIcon>();
+        string selectedIconName = "";
         Point2D baseP1, baseP2, baseP3; // запомненные "родные" координаты 
         Point2D baseRectStart;
         int baseRectW, baseRectH;
@@ -186,6 +187,57 @@ namespace WpfApp50
                         ImagePath = file
                     }
                 );
+            }
+        }
+        public void DisplayIcons()
+        {
+            IconsListBox.Items.Clear(); // на случай повторной загрузки — чистим старый список
+
+            foreach (EnemyIcon icon in enemyIcons)
+            {
+                // создание элемента Image для отображения иконки
+                Image image = new Image
+                {
+                    // установка источника изображения
+                    Source = new BitmapImage(
+                        new Uri(icon.ImagePath) // Uri — это универсальный идентификатор ресурса,
+                                                // который указывает на местоположение ресурса,
+                                                // в данном случае на путь к файлу изображения
+                    ),
+                    Height = 64 // высота изображения
+                };
+                IconsListBox.Items.Add(image); // добавление изображения в ListBox
+            }
+        }
+
+        private void BtnLoadIcons_Click(object sender, RoutedEventArgs e)
+        {
+            // создание диалога выбора папки
+            var dlg = new Microsoft.Win32.OpenFolderDialog();
+
+            if (dlg.ShowDialog() == true)
+            {
+                string path = dlg.FolderName;
+                LoadIconsFromFolder(path);
+                DisplayIcons();
+            }
+        }
+        private void IconsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // приведение sender к типу ListBox
+            ListBox iconHolder = sender as ListBox;
+
+            // проверка, что выбранный элемент является изображением
+            // и что элемент не равен null
+            if (iconHolder.SelectedItem is Image selectedImage && iconHolder.SelectedItem != null)
+            {
+                // получение имени файла из источника изображения
+                // так как Source это Uri, то для получения имени файла
+                // нужно преобразовать его в строку и использовать Path.GetFileName
+                string iconName = System.IO.Path.GetFileName(selectedImage.Source.ToString());
+
+                // сохраняем выбранное имя иконки в поле — пригодится при создании противника
+                selectedIconName = iconName;
             }
         }
     }
