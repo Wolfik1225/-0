@@ -28,9 +28,16 @@ namespace WpfApp50
         Point2D baseRectStart;
         int baseRectW, baseRectH;
         Rectangle rect;
+
+        Player player;
+        Enemy currentEnemy;
         public MainWindow()
         {
             InitializeComponent();
+            player = new Player();
+            enemyList.LoadFromJson("D:\\Информатика лабы\\3 семак\\лаба 0\\enemies.json"); // имя файла — то самое, под которым сохраняла шаблоны в Лабе 1
+            SpawnNextEnemy();
+
             Point2D p1 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
             Point2D p2 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
             Point2D p3 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
@@ -41,6 +48,18 @@ namespace WpfApp50
             Rectangle square = new Rectangle(new Point2D(100, 155), 150, 150);
             DrawRectangle(square);
         }
+
+        private void SpawnNextEnemy()
+        {
+            CEnemyTemplate template = enemyList.GetRandomEnemy();
+            if (template == null) return;
+
+            EnemyIcon icon = new EnemyIcon { Name = template.IconName, ImagePath = template.IconName };
+            currentEnemy = new Enemy(template, icon);
+
+            UpdateEnemyUI();
+        }
+
         public void DrawLine(Point2D p1, Point2D p2)
         {
             Line line = new Line();
@@ -297,6 +316,46 @@ namespace WpfApp50
                 enemyList.LoadFromJson(dlg.FileName);
                 RefreshEnemiesListBox();
             }
+        }
+
+        private void UpdateEnemyUI()
+        {
+            TxtEnemyNameDisplay.Text = currentEnemy.Name;
+            TxtEnemyHp.Text = "HP: " + currentEnemy.CurrentHitPoints.ToString() + " / " + currentEnemy.MaxHitPoints.ToString();
+            TxtPlayerGold.Text = "Золото: " + player.Gold.ToString();
+            TxtPlayerLevel.Text = "Уровень: " + player.Lvl.ToString();
+            TxtPlayerDamage.Text = "Урон: " + player.Damage.ToString();
+
+            // ищем загруженную иконку по имени, которое хранится в шаблоне
+            EnemyIcon icon = enemyIcons.Find(i => i.Name == currentEnemy.Icon.Name);
+            if (icon != null)
+            {
+                EnemyIconImage.Source = new BitmapImage(new Uri(icon.ImagePath));
+            }
+        }
+
+        private void EnemyIconImage_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (currentEnemy == null || currentEnemy.IsDead) return;
+
+            BigNumber dmg = player.DealDamage();
+            bool killed = currentEnemy.TakeDamage(dmg, out BigNumber goldReward);
+
+            if (killed)
+            {
+                player.AddGold(goldReward);
+                SpawnNextEnemy();
+            }
+            else
+            {
+                UpdateEnemyUI();
+            }
+        }
+
+        private void BtnUpgrade_Click(object sender, RoutedEventArgs e)
+        {
+            player.TryUpgrade();
+            UpdateEnemyUI();
         }
     }
 }

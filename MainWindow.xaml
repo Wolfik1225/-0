@@ -13,6 +13,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="150"/>
             <RowDefinition Height="100"/>
+            <RowDefinition Height="200"/>
         </Grid.RowDefinitions>
         <Canvas x:Name = "Scene" HorizontalAlignment="Left" Height="400" Margin="15,0,0,0" VerticalAlignment="Center" Width="780" Grid.Row="2" />
 
@@ -74,5 +75,17 @@
             <Button x:Name="BtnSaveEnemies" Content="Сохранить" Click="BtnSaveEnemies_Click" Margin="10,0,0,0"/>
             <Button x:Name="BtnLoadEnemies" Content="Загрузить" Click="BtnLoadEnemies_Click" Margin="5,0,0,0"/>
         </WrapPanel>
+        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="5">
+            <Image x:Name="EnemyIconImage" Width="100" Height="100" MouseLeftButtonDown="EnemyIconImage_Click"/>
+
+            <StackPanel Margin="20,0,0,0">
+                <TextBlock x:Name="TxtEnemyNameDisplay" FontSize="16" FontWeight="Bold"/>
+                <TextBlock x:Name="TxtEnemyHp"/>
+                <TextBlock x:Name="TxtPlayerGold"/>
+                <TextBlock x:Name="TxtPlayerLevel"/>
+                <TextBlock x:Name="TxtPlayerDamage"/>
+                <Button x:Name="BtnUpgrade" Content="Улучшить урон" Click="BtnUpgrade_Click" Margin="0,10,0,0" Width="150"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

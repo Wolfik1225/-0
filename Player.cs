@@ -26,7 +26,7 @@ namespace WpfApp50
         {
             lvl = 1;
             gold = new BigNumber("0");
-            damage = new BigNumber("1");
+            damage = new BigNumber("5");
             damageModifier = 1.2;
             upgradeCost = new BigNumber("100");
             upgradeModifier = 1.2;
