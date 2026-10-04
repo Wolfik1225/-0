@@ -40,5 +40,10 @@ namespace WpfApp50
             GoldModifier = goldModifier;
             SpawnChance = spawnChance;
         }
+        // позволяет скорректировать шанс появления (используется при нормализации шансов)
+        public void SetSpawnChance(double newChance)
+        {
+            SpawnChance = newChance;
+        }
     }
 }

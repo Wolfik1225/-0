@@ -106,5 +106,41 @@ namespace WpfApp50
                 enemies.Add(enemy);
             }
         }
+
+        private Random rng = new Random();
+
+        // нормализация шансов появления объектов, сумма шансов должна быть равна 1
+        public void normalizeChances()
+        {
+            double sum = 0;
+            for (int i = 0; i < enemies.Count; i++)
+                sum += enemies[i].SpawnChance;
+
+            if (sum == 0) return;
+
+            for (int i = 0; i < enemies.Count; i++)
+                enemies[i].SetSpawnChance(enemies[i].SpawnChance / sum);
+        }
+
+        // поиск шаблона по выпавшей вероятности
+        public CEnemyTemplate findByChance(double chance)
+        {
+            double sum = 0;
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                sum += enemies[i].SpawnChance;
+                if (sum >= chance) return enemies[i];
+            }
+            return null;
+        }
+
+        // выбирает случайного следующего противника с учётом нормализованных шансов
+        public CEnemyTemplate GetRandomEnemy()
+        {
+            normalizeChances();
+            double chance = rng.NextDouble();
+            return findByChance(chance);
+        }
+
     }
 }
